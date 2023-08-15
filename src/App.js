@@ -6,6 +6,21 @@ import BookList from "./components/BookList";
 export default function App() {
     const [books, setBooks] = useState([])
 
+    /* 
+    * Update state by using the map function to
+    * loop through the array and replace the
+    * book with the matching id.
+    * 
+    * The function will be passed to childre
+    * components so they can update the state
+    * of the parent component.
+    */
+    function editBookById(id, title) {
+        setBooks(prevBooks => prevBooks.map(book =>
+            book.id === id ? { ...book, title } : book
+        ));
+    }
+
     function deleteBookById(id) {
         setBooks(books.filter(book => book.id !== id))
     }
@@ -25,7 +40,7 @@ export default function App() {
     };
 
     return <div className='app'>
-        <BookList books={books}  onDelete={deleteBookById} />
+        <BookList books={books} onEdit={editBookById} onDelete={deleteBookById} />
         <BookCreate onCreate={createBook} />
     </div>
 }

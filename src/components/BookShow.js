@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import BookEdit from './BookEdit';
 
-export default function BookShow({ book, onDelete }) {
+export default function BookShow({ book, onDelete, onEdit }) {
     const [showEdit, setShowEdit] = useState(false);
 
     const handleClick = () => {
         onDelete(book.id)
     }
 
-    let content = showEdit ? <BookEdit book={book} /> : book.title;
+    const handleSubmit = (id, newTitle) => {
+        setShowEdit(false);
+        onEdit(id, newTitle)
+    }
+
+    let content = showEdit ? <BookEdit onSubmit={handleSubmit} book={book} /> : book.title;
 
     return (
     <div className="book-show">

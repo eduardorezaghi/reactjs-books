@@ -34,8 +34,9 @@ export default function App() {
         ));
     }
 
-    function deleteBookById(id) {
-        setBooks(books.filter(book => book.id !== id))
+    async function deleteBookById(id) {
+        await axios.delete(`http://localhost:26751/books/${id}`);
+        setBooks(prevBooks => prevBooks.filter(book => book.id !== id));
     }
 
     async function createBook(title) {

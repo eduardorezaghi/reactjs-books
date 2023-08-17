@@ -1,10 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import BookCreate from './components/BookCreate'
 import BookList from "./components/BookList";
-
+import axios from 'axios'
 
 export default function App() {
     const [books, setBooks] = useState([])
+
+    async function fetchBooks() {
+        await axios.get('http://localhost:26751/books')
+        .then(response => { 
+            setBooks(response.data)
+        })
+    }
+
+    useEffect(() => {
+        fetchBooks()
+    }, []);
 
     /* 
     * Update state by using the map function to

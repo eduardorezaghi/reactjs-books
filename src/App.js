@@ -36,17 +36,17 @@ export default function App() {
         setBooks(books.filter(book => book.id !== id))
     }
 
-    function createBook(title) {
+    async function createBook(title) {
+        const response = await axios.post('http://localhost:26751/books', { title });
+
         if (!title) return;
         else {
             /* Update state by using the spread operator
              * to copy the existing array and add
              * a new book to the end */
-            setBooks([...books, { 
-                id: crypto.randomUUID(),
-                title
-            }])
-            console.log(books)
+            setBooks([...books, 
+                response.data
+            ])
         }
     };
 

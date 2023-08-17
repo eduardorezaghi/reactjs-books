@@ -26,9 +26,11 @@ export default function App() {
     * components so they can update the state
     * of the parent component.
     */
-    function editBookById(id, title) {
+    async function editBookById(id, title) {
+        const response = await axios.put(`http://localhost:26751/books/${id}`, { title });
+
         setBooks(prevBooks => prevBooks.map(book =>
-            book.id === id ? { ...book, title } : book
+            book.id === id ? { ...book, ...response.data } : book
         ));
     }
 

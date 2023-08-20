@@ -9,10 +9,10 @@ const BooksContext = createContext();
  * 
  * @param {Object} props
  *
- * @returns {JSX.Element}
+ * @returns {React.JSX.Element}
  */
 export function BooksProvider ({ children }) {
-    const [count, setCount] = useState(5);
+    let [count, setCount] = useState(5);
 
     const value = {
         count,

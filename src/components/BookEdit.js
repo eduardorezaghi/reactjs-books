@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import BooksContext from '../context/books'
 
 export default function BookEdit({ onSubmit, book }) {
     const [title, setTitle] = useState(book.title)
+    const { editBookById } = useContext(BooksContext)
 
 
     function handleChange(e) {
@@ -11,8 +13,10 @@ export default function BookEdit({ onSubmit, book }) {
     function handleSubmit(e) {
         e.preventDefault()
 
-        onSubmit(book.id, title)
+        onSubmit();
+        editBookById(book.id, title);
     }
+
     return (<form className="book-edit">
         <label htmlFor="title">Title</label>
         <input  className="input" type="text" value={title} onChange={handleChange} />
